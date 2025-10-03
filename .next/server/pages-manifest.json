@@ -4,8 +4,8 @@
   "/api/auth/register": "pages/api/auth/register.js",
   "/api/prestadores/[...params]": "pages/api/prestadores/[...params].js",
   "/api/prestadores/[id]": "pages/api/prestadores/[id].js",
-  "/api/prestadores": "pages/api/prestadores.js",
   "/_app": "pages/_app.js",
+  "/api/prestadores": "pages/api/prestadores.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/404": "pages/404.html"

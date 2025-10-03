@@ -2,7 +2,6 @@
   "name": "essencial-ja-api-vercel",
   "version": "1.0.0",
   "description": "API otimizada para Vercel - Essencial Já",
-  "type": "module",
   "main": "api/index.js",
   "scripts": {
     "dev": "next dev",

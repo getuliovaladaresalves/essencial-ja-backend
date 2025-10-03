@@ -176,7 +176,7 @@
       "disableOptimizedLoading": false,
       "gzipSize": true,
       "craCompat": false,
-      "esmExternals": false,
+      "esmExternals": true,
       "fullySpecified": false,
       "swcTraceProfiling": false,
       "forceSwcTransforms": false,

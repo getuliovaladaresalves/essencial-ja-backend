@@ -48,7 +48,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where: {
         disponivel: true
       },
-      include: {
+      select: {
+        id: true,
+        fotoUrl: true,
+        descricao: true,
+        disponivel: true,
+        atendimento24h: true,
         user: {
           select: {
             id: true,

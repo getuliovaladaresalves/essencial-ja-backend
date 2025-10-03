@@ -52,7 +52,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const prestador = await prisma.prestador.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        fotoUrl: true,
+        descricao: true,
+        disponivel: true,
+        atendimento24h: true,
         user: {
           select: {
             id: true,

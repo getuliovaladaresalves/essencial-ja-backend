@@ -31,11 +31,12 @@ model Servico {
 }
 
 model Prestador {
-  id         String    @id @default(uuid())
-  fotoUrl    String?
-  descricao  String?
-  disponivel Boolean   @default(true)
-  userId     String    @unique
-  user       User      @relation(fields: [userId], references: [id])
-  servicos   Servico[] @relation("PrestadorToServico")
+  id            String    @id @default(uuid())
+  fotoUrl       String?
+  descricao     String?
+  disponivel    Boolean   @default(true)
+  atendimento24h Boolean  @default(false)
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  servicos      Servico[] @relation("PrestadorToServico")
 }

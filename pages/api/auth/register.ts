@@ -8,6 +8,15 @@ interface RegisterUserDto {
   nome: string;
   email: string;
   senha: string;
+  telefone?: string;
+  categoria?: string;
+  endereco?: string;
+  descricao?: string;
+  horarioFuncionamento?: string;
+  precoBase?: string;
+  experiencia?: string;
+  certificacoes?: string;
+  atendimento24h?: boolean;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -25,7 +34,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: 'Método não permitido' });
   }
 
-  const { nome, email, senha }: RegisterUserDto = req.body;
+  const { 
+    nome, 
+    email, 
+    senha, 
+    telefone, 
+    categoria, 
+    endereco, 
+    descricao, 
+    horarioFuncionamento, 
+    precoBase, 
+    experiencia, 
+    certificacoes, 
+    atendimento24h 
+  }: RegisterUserDto = req.body;
 
   // Validações básicas
   if (!nome || !email || !senha) {
@@ -63,6 +85,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         criadoEm: true
       }
     });
+
+    // Se é um prestador (tem campos adicionais), criar o perfil de prestador
+    if (categoria || endereco || descricao) {
+      await prisma.prestador.create({
+        data: {
+          userId: user.id,
+          descricao: descricao || '',
+          atendimento24h: atendimento24h || false,
+        }
+      });
+    }
 
     return res.status(201).json({
       message: 'Usuário criado com sucesso',

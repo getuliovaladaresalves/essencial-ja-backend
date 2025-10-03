@@ -15,9 +15,5 @@
       "src": "/api/prestadores/(.*)",
       "dest": "/api/prestadores/[...params]"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "JWT_SECRET": "@jwt_secret"
-  }
+  ]
 }

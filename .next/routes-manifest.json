@@ -28,6 +28,14 @@
       "namedRegex": "^/api/auth/(?<nxtPaction>.+?)(?:/)?$"
     },
     {
+      "page": "/api/prestadores/[id]",
+      "regex": "^/api/prestadores/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/prestadores/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
       "page": "/api/prestadores/[...params]",
       "regex": "^/api/prestadores/(.+?)(?:/)?$",
       "routeKeys": {

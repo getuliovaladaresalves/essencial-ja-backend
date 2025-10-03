@@ -5,7 +5,6 @@
       "DATABASE_URL": "postgresql://postgres:58@db.chvulzyyvqaxokgvajyk.supabase.co:5432/postgres",
       "JWT_SECRET": "your-super-secret-jwt-key-here"
     },
-    "webpack": null,
     "eslint": {
       "ignoreDuringBuilds": false
     },

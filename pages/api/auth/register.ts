@@ -9,6 +9,7 @@ interface RegisterUserDto {
   email: string;
   senha: string;
   telefone?: string;
+  cpf?: string;
   categoria?: string;
   endereco?: string;
   descricao?: string;
@@ -39,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     email, 
     senha, 
     telefone, 
+    cpf,
     categoria, 
     endereco, 
     descricao, 
@@ -76,12 +78,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       data: {
         nome,
         email,
-        senhaHash
+        senhaHash,
+        telefone,
+        cpf
       },
       select: {
         id: true,
         nome: true,
         email: true,
+        telefone: true,
+        cpf: true,
         criadoEm: true
       }
     });
@@ -93,6 +99,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           userId: user.id,
           descricao: descricao || '',
           atendimento24h: atendimento24h || false,
+          endereco: endereco || null,
+          horarioFuncionamento: horarioFuncionamento || null,
+          precoBase: precoBase || null,
+          experiencia: experiencia || null,
+          certificacoes: certificacoes || null,
         }
       });
     }

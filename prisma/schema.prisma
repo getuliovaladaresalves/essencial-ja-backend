@@ -12,6 +12,8 @@ model User {
   email     String     @unique
   nome      String
   senhaHash String
+  telefone  String?
+  cpf       String?
   criadoEm  DateTime   @default(now())
   prestador Prestador?
 }

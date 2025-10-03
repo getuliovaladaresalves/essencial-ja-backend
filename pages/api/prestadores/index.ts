@@ -44,9 +44,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
+    // Obter parâmetros de query para filtros
+    const { categoria, emergencia } = req.query;
+    
+    // Construir filtros base
+    const whereClause: any = {
+      disponivel: true
+    };
+
+    // Se for uma busca de emergência, priorizar prestadores 24h
+    if (emergencia === 'true') {
+      whereClause.atendimento24h = true;
+    }
+
+    // Se categoria for especificada, filtrar por serviços
+    let servicosFilter: any = undefined;
+    if (categoria && typeof categoria === 'string') {
+      servicosFilter = {
+        some: {
+          categoria: {
+            nome: {
+              contains: categoria,
+              mode: 'insensitive'
+            }
+          }
+        }
+      };
+    }
+
     const prestadores = await prisma.prestador.findMany({
       where: {
-        disponivel: true
+        ...whereClause,
+        ...(servicosFilter && { servicos: servicosFilter })
       },
       select: {
         id: true,
@@ -59,6 +88,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             id: true,
             nome: true,
             email: true,
+            telefone: true,
             criadoEm: true
           }
         },
@@ -73,11 +103,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         }
       },
-      orderBy: {
-        user: {
-          nome: 'asc'
-        }
-      }
+      orderBy: [
+        // Priorizar prestadores 24h em emergências
+        ...(emergencia === 'true' ? [{ atendimento24h: 'desc' as const }] : []),
+        { user: { nome: 'asc' as const } }
+      ]
     });
 
     return res.status(200).json({
